@@ -1,0 +1,39 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+// User input
+flowVelocity         20;
+pressure             0;
+turbulentIntensity   0.05; // 5%
+Dchar                0.0254; // Scale if the inlet, here the height
+
+// Modelling constantsand assumptions
+Cmu                  0.09; // Modelling constant
+Lchar                0.07; // Use 7% of smallest diameter to calculate
+                           // characteristic length scale L
+
+// Calculated properties
+L                    #calc "$Lchar*$Dchar";
+
+turbulentKE          #calc
+#{
+   1.5*pow(($turbulentIntensity*$flowVelocity), 2.0)
+#};
+
+turbulentEpsilon     #calc "pow($Cmu, 0.75)*pow($turbulentKE, 1.5)/$L";
+
+turbulentOmega       #calc "pow($turbulentKE, 0.5)/pow($Cmu, 0.25)/$L";
+
+nuTildaInit          #calc "1.5*$flowVelocity*$turbulentIntensity*$L";
+
+nutInit              #calc "$Cmu*pow($turbulentKE, 2.0)/$turbulentEpsilon";
+
+
+#inputMode           merge
+
+// ************************************************************************* //
