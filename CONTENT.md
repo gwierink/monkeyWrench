@@ -13,4 +13,4 @@
     snappyHexMesh. Sometimes planar surfaces or narrow slots tend to be
     castallated and not properly snapped. This case shows an example of
     how to do this.
-..* Example case: tutorials/incompressible/pimpleFoam/inclinedSlots
+..* Example case: tutorials/incompressible/simpleFoam/inclinedSlots
