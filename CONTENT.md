@@ -21,3 +21,10 @@ need to be able to see the surfaces in ParaView. ParaView does not like zipped
 files, so to make things faster here are two scripts to quicly unzip and re-zip
 a bunch of files.
 * Location: bin/gzipAll and bin/gunzipAll
+
+4. Convert surface file mm to m scale
+* OpenFOAM's surfaceTransformPoints utility can scale triangulated surfaces. Not
+to retype the same syntax over and over again, here is a script that uses
+surfaceTransformPoints to scale a geometry from mm units to m units for use with
+snappyHexMesh.
+* Location: bin/surfaceScaleMilimeterToMeter
