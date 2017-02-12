@@ -1,0 +1,45 @@
+#!/bin/bash
+
+## Description
+
+# This script uses OpenFOAM's surfaceTransformPoints utility to scale a
+# triangulated surface (an STL or OBJ file) from mm to m. That is, scale by
+# 0.001 in all directions. The script takes two arguments: the input file and
+# the output file.
+#
+# Usage: surfaceScaleMilimeterToMeter inputFile.stl outputFile.stl
+#
+# provis | process visualization, February 2017
+# URL: www.process-visualization.com
+
+
+## Functions
+
+usage()
+{
+    echo -e "\n\tError: Please provide an input and an output file."
+    echo -e "\n\t       The input and output must be STL or OBJ.\n"
+    echo -e "\n\tUsage: surfaceScaleMilimeterToMeter inputFile.stl outputFile.stl"
+    echo -e "\n\n\tExiting\n"
+    exit 1
+}
+
+
+## Variables and arguments
+
+INPUT_FILE=$1
+OUTPUT_FILE=$2
+
+
+## Main program
+
+if [ $# -ne 2 ]; then
+    usage
+fi
+
+# Scale the triangulated surface file
+$FOAM_APPBIN/surfaceTransformPoints -scale '(0.001 0.001 0.001)' $1 $2
+
+echo -e "\n\tDone.\n"
+
+## -------------------------------------------------------------- ## End-of-file
