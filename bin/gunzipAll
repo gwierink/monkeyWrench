@@ -1,0 +1,30 @@
+#!/bin/bash
+
+## Description
+
+# Use gunzip to uncompress all files in cwd.
+#
+# Usage: gunzipAll
+#
+# provis | process visualization, February 2017
+# URL: www.process-visualization.com
+
+
+## Functions
+
+
+## Variables and arguments
+
+
+## Main program
+
+echo -e '\n'
+
+for i in `ls`; do
+    echo -e "\tUnzipping file $i"
+    gunzip $i
+done
+
+echo -e "\n\tDone.\n"
+
+## -------------------------------------------------------------- ## End-of-file
